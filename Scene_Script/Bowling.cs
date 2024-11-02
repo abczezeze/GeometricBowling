@@ -44,6 +44,7 @@ public partial class Bowling : Node3D
 	{
 		if (inputEvent is InputEventMouseButton btn && btn.ButtonIndex == MouseButton.Left && inputEvent.IsPressed())
 		{
+			_BallRigid.Sleeping = false; //fix issue
 			_BallRigid.ApplyImpulse(new Vector3(0, 0, (float)(_PowerValue*-1)));
         }
 	}
@@ -67,18 +68,18 @@ public partial class Bowling : Node3D
 	}
 	public void LeftImulse()
 	{
-		_BallRigid.ApplyImpulse(new Vector3((float)-0.1, 0,0));
+		_BallRigid.ApplyImpulse(new Vector3((float)-0.5, 0,0)); //fix
 	}
 	public void RightImulse()
 	{
-		_BallRigid.ApplyImpulse(new Vector3((float)0.1, 0,0));
+		_BallRigid.ApplyImpulse(new Vector3((float)0.5, 0,0)); //fix
 	}
 	public void _onArea3dBodyEntered(Node3D body)
 	{
 		if (body.IsInGroup("BallRigid"))
 		{
 			_BallRigid.Position = new Vector3(0,1,0);
-			_BallRigid.ApplyImpulse(new Vector3(0, 0, 1));
+			_BallRigid.Sleeping = true; //fix
 		}
 	}
 }

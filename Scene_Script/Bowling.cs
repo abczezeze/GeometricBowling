@@ -1,85 +1,58 @@
 using Godot;
-using System;
 
 public partial class Bowling : Node3D
 {	
-	private RigidBody3D _BallRigid;
-	private RigidBody3D _PinRigid1;
-	private HScrollBar _PowerBar;
-	private Label _LabelPower;
-	private double _PowerValue;
-	private Button _LeftButton;
-	private Button _RightButton;
-	private AnimationPlayer _firstAnim;
+	RigidBody3D _ballRigid;
+	Area3D _checkY;
+	//MeshInstance3D _arrowMesh;
+	MeshInstance3D _starMesh;
+	Camera3D _camera3D;
+	//Button _shootButton;
+	//Area3D _fakeBall;
+	RandomNumberGenerator _rng = new RandomNumberGenerator();
 	
 	public override void _Ready()
 	{
-		_BallRigid = GetNode<RigidBody3D>("BallRigid");
-		_PinRigid1 = GetNode<RigidBody3D>("PinRigid1");
-		for(int i=-2;i<=2;i++)
-		{
-			for(int j=-15;j<=-13;j++)
-			{
-			AddChild(_PinRigid1.Duplicate());
-			Vector3 vector3 = new Vector3(i, 2, j);
-			_PinRigid1.Position = vector3;
-			}
-		}
-		_PowerBar = GetNode<HScrollBar>("VBoxContainer/PowerBar");
-		_LabelPower = GetNode<Label>("VBoxContainer/PowerLabel");
-		_LeftButton = GetNode<Button>("LeftButton");
-		_LeftButton.Pressed += LeftImulse;
-		_RightButton = GetNode<Button>("RightButton");
-		_RightButton.Pressed += RightImulse;
-		_firstAnim = GetNode<AnimationPlayer>("AnimationPlayer");
-		_firstAnim.Play("first");
-
+		_ballRigid = GetNode<RigidBody3D>("BallRigidA");
+		_camera3D = GetNode<Camera3D>("Camera3D");
+		Global.Camera3D = _camera3D;
+		_checkY = GetNode<Area3D>("CheckY");
+		_checkY.BodyEntered += OnCheckYBodyEntered;
+		_starMesh = GetNode<MeshInstance3D>("Moon");
 	}
 	public override void _Process(double delta)
 	{
-		_PowerValue = _PowerBar.Value; 
-		_LabelPower.SetText("Power Value : " + _PowerValue.ToString("F2"));
+		float rotate=0f;
+		_starMesh.RotateX(rotate+=0.01f);
+		_starMesh.RotateY(rotate+=0.01f);
+
 	}
-	public void _OnBallRigidInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 normal, int shape_idx)
+
+	public void NextRoll()
 	{
-		if (inputEvent is InputEventMouseButton btn && btn.ButtonIndex == MouseButton.Left && inputEvent.IsPressed())
+		if (BallRigid._ballMesh.GetActiveMaterial(0) is StandardMaterial3D ballMat)
 		{
-			_BallRigid.Sleeping = false; //fix issue
-			_BallRigid.ApplyImpulse(new Vector3(0, 0, (float)(_PowerValue*-1)));
-        }
-	}
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventKey eventKey)
-		{
-			if (eventKey.Pressed && eventKey.Keycode == Key.Right)
-			{
-				GetViewport().WarpMouse(new Vector2(1075,700));
-			}
-			if (eventKey.Pressed && eventKey.Keycode == Key.Left)
-			{
-				GetViewport().WarpMouse(new Vector2(20,700));
-			}
-			if (eventKey.Pressed && eventKey.Keycode == Key.Space)
-			{
-				GetTree().ReloadCurrentScene();
-			}
+			ballMat.AlbedoColor = new Color(_rng.RandfRange(0.2f,1), _rng.RandfRange(0.2f,1), _rng.RandfRange(0.2f,1));
 		}
 	}
-	public void LeftImulse()
+
+	public void OnCheckYBodyEntered(Node3D body)
 	{
-		_BallRigid.ApplyImpulse(new Vector3((float)-0.5, 0,0)); //fix
-	}
-	public void RightImulse()
-	{
-		_BallRigid.ApplyImpulse(new Vector3((float)0.5, 0,0)); //fix
-	}
-	public void _onArea3dBodyEntered(Node3D body)
-	{
-		if (body.IsInGroup("BallRigid"))
+		if(body.IsInGroup("BallGroup"))
 		{
-			_BallRigid.Position = new Vector3(0,1,0);
-			_BallRigid.Sleeping = true; //fix
+			NextRoll();   
+			_ballRigid.Position = new Vector3(0,1,0);
+			_ballRigid.Sleeping = true;
+			Global.IfBallGrop();
+
+		}
+		if(body.IsInGroup("PinGroup"))
+		{
+			Global.ScoreCurrent+=1;
+		}
+		if(body.IsInGroup("SweepPin"))
+		{
+			Global.SweepPinRigid.QueueFree();
 		}
 	}
 }

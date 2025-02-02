@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://245is23kgrtk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jdd22"]
+size = Vector3(0.5, 2, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50x5w"]
+albedo_color = Color(1, 0.34191, 0.7287, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m6ggn"]
+material = SubResource("StandardMaterial3D_50x5w")
+size = Vector3(0.5, 2, 0.5)
+
+[node name="PinRigid" type="RigidBody3D"]
+mass = 0.001
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_jdd22")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_m6ggn")

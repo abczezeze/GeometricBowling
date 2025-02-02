@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b555ea535q8ek"]
+
+[ext_resource type="Script" path="res://Scene_Script/BallRigid.cs" id="1_j2l6d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fc35g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vaip2"]
+cull_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhh34"]
+next_pass = SubResource("StandardMaterial3D_vaip2")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.886275, 0.121569, 0.117647, 1)
+metallic_specular = 0.02
+roughness = 0.02
+
+[sub_resource type="SphereMesh" id="SphereMesh_vh2jy"]
+material = SubResource("StandardMaterial3D_rhh34")
+
+[node name="BallRigid" type="RigidBody3D"]
+script = ExtResource("1_j2l6d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_fc35g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_vh2jy")

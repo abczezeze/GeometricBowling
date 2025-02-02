@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbieutvhgpe1v"]
+
+[ext_resource type="Script" path="res://Scene_Script/MainMenu.cs" id="1_aly3p"]
+[ext_resource type="FontFile" uid="uid://6igkmpymsu5m" path="res://Font/abczezeze.ttf" id="2_ftf2i"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aly3p")
+
+[node name="SceneVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -46.5
+offset_right = 55.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BowlingScene" type="Label" parent="SceneVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ftf2i")
+theme_override_font_sizes/font_size = 25
+text = "ฉากเกมส์"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bowling" type="Button" parent="SceneVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ftf2i")
+theme_override_font_sizes/font_size = 22
+text = "หนี่ง"
+
+[node name="BowlingSec" type="Button" parent="SceneVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ftf2i")
+theme_override_font_sizes/font_size = 22
+text = "สอง"
+
+[node name="BowlingThird" type="Button" parent="SceneVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ftf2i")
+theme_override_font_sizes/font_size = 22
+text = "สาม"
+
+[node name="BowlingFourth" type="Button" parent="SceneVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ftf2i")
+theme_override_font_sizes/font_size = 22
+text = "สี่"

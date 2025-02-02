@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://p1mgflqq5fvl"]
+
+[ext_resource type="Material" uid="uid://5rakvukl3ohk" path="res://Materials/ToonNextPass.tres" id="1_xg4pc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0a0c6"]
+radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adgil"]
+next_pass = ExtResource("1_xg4pc")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.425999, 0.177921, 1, 1)
+metallic_specular = 0.02
+roughness = 0.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_62rkd"]
+material = SubResource("StandardMaterial3D_adgil")
+top_radius = 0.3
+bottom_radius = 0.3
+radial_segments = 16
+
+[node name="PinRigidB" type="RigidBody3D"]
+mass = 0.001
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_0a0c6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_62rkd")
+skeleton = NodePath("")

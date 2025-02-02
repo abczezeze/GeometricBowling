@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://ckia6f3bple5k"]
+
+[ext_resource type="Script" path="res://Scene_Script/BowlingSec.cs" id="1_cn0fl"]
+[ext_resource type="PackedScene" uid="uid://b555ea535q8ek" path="res://Scene_Script/BallRigid.tscn" id="2_ampk3"]
+[ext_resource type="ArrayMesh" uid="uid://bgc2ai5l6cdk4" path="res://Models/Lane.obj" id="2_vffej"]
+[ext_resource type="ArrayMesh" uid="uid://6fpjcfyqh0wh" path="res://Models/star.obj" id="4_2s02k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xyrcd"]
+size = Vector3(12, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fw140"]
+size = Vector3(1, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1pn0"]
+size = Vector3(30, 1, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwr0k"]
+albedo_color = Color(0.930464, 0.948351, 0, 1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_upd0c"]
+
+[sub_resource type="Sky" id="Sky_udl58"]
+sky_material = SubResource("PhysicalSkyMaterial_upd0c")
+
+[sub_resource type="Environment" id="Environment_5a565"]
+background_mode = 2
+sky = SubResource("Sky_udl58")
+
+[node name="BowlingSec" type="Node3D"]
+script = ExtResource("1_cn0fl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866026, -0.286788, 0.409575, 0, 0.819152, 0.573576, -0.5, 0.496732, -0.709406, 0, 6, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.985996, 0.166769, 0, -0.166769, 0.985996, 0, 7.2, 8.6)
+
+[node name="BallRigidA" parent="." instance=ExtResource("2_ampk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.989796, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.6)
+mesh = ExtResource("2_vffej")
+
+[node name="BaseSB" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/BaseSB"]
+shape = SubResource("BoxShape3D_xyrcd")
+
+[node name="SideLeftSB" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/SideLeftSB"]
+shape = SubResource("BoxShape3D_fw140")
+
+[node name="SideRightSB" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/SideRightSB"]
+shape = SubResource("BoxShape3D_fw140")
+
+[node name="CheckY" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CheckY"]
+shape = SubResource("BoxShape3D_c1pn0")
+
+[node name="Moon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.97, 0, 0, 0, 1.97, 0, 0, 0, 1.97, -0.677143, 7.88369, -19.0138)
+material_override = SubResource("StandardMaterial3D_qwr0k")
+mesh = ExtResource("4_2s02k")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5a565")

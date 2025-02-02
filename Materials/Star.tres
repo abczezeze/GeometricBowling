@@ -1,0 +1,60 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://cqa2b7tqrdgge"]
+
+[sub_resource type="Gradient" id="Gradient_kwmlf"]
+offsets = PackedFloat32Array(0.133333, 0.40056, 0.745098)
+colors = PackedColorArray(0.947918, 0.947918, 4.1585e-05, 1, 1, 0.541176, 0, 1, 1, 0.807843, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4jcfl"]
+gradient = SubResource("Gradient_kwmlf")
+width = 32
+height = 32
+fill_from = Vector2(1, 1)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_r5etl"]
+texture = SubResource("GradientTexture2D_4jcfl")
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_5j6dk"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0, 0.14)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_348eg"]
+input_name = "time"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, depth_test_disabled, unshaded, shadows_disabled;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// Input:4
+	float n_out4p0 = TIME;
+
+
+// UVFunc:3
+	vec2 n_in3p1 = vec2(0.50000, 0.50000);
+	vec2 n_out3p0 = vec2(n_out4p0) * n_in3p1 + UV;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out3p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+
+
+}
+"
+flags/depth_test_disabled = true
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/fragment/0/position = Vector2(520, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_r5etl")
+nodes/fragment/2/position = Vector2(260, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeUVFunc_5j6dk")
+nodes/fragment/3/position = Vector2(0, 100)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_348eg")
+nodes/fragment/4/position = Vector2(-320, 100)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 4, 0, 3, 2, 2, 0, 0, 0)

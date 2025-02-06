@@ -38,19 +38,6 @@ public partial class BowlingThird : Node3D
     public override void _Process(double delta)
 	{
 		_batBar.Translate(new Vector3(0,0,(float)(delta*Global.SpeedX)));
-		if(_batBar.Transform.Origin.X<-35)
-		{
-			_batBar.Position = new Vector3(_rng.RandfRange(35,50),_rng.RandfRange(3,10),_rng.RandfRange(-15,-22));
-		}
-		
-		if(_batBar.Transform.Origin.X<0 && _batBar.Transform.Origin.X>-5)
-		{
-			_batAnim.Play("Glance");
-		}
-		else
-		{
-			_batAnim.Play("BatIdle");
-		}
 	}
 
 	public void NextRoll()

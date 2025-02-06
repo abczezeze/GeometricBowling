@@ -16,7 +16,7 @@ public partial class MainMenu : Node
 		_sceneSec.Pressed += OnSceneSec;
 		_sceneThird = GetNode<Button>("SceneVBox/BowlingThird");
 		_sceneThird.Pressed += OnSceneThird;
-		_sceneFourth = GetNode<Button>("SceneVBox/BowlingFourth");
+		_sceneFourth = GetNode<Button>("SceneVBox/Exit");
 		_sceneFourth.Pressed += OnSceneFourth;
 	}
 
@@ -26,7 +26,7 @@ public partial class MainMenu : Node
 		_sceneA.Text = Tr("FIRST");
 		_sceneSec.Text = Tr("SEC");
 		_sceneThird.Text = Tr("THIRD");
-		_sceneFourth.Text = Tr("FOURTH");
+		_sceneFourth.Text = Tr("EXIT");
 	}
 	public void OnSceneBowling()
 	{
@@ -45,6 +45,6 @@ public partial class MainMenu : Node
 	}
 	public void OnSceneFourth()
 	{
-		GetTree().ChangeSceneToFile("res://Scene_Script/BowlingFourth.tscn");
+		GetTree().Quit(); 
 	}	
 }

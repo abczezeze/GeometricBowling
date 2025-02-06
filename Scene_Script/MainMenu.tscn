@@ -32,7 +32,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ftf2i")
 theme_override_font_sizes/font_size = 25
-text = "ฉากเกมส์"
+text = "ฉากเกม"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -54,8 +54,8 @@ theme_override_fonts/font = ExtResource("2_ftf2i")
 theme_override_font_sizes/font_size = 22
 text = "สาม"
 
-[node name="BowlingFourth" type="Button" parent="SceneVBox"]
+[node name="Exit" type="Button" parent="SceneVBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ftf2i")
 theme_override_font_sizes/font_size = 22
-text = "สี่"
+text = "ออกเกม"

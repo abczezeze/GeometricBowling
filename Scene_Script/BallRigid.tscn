@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b555ea535q8ek"]
+[gd_scene load_steps=7 format=3 uid="uid://b555ea535q8ek"]
 
 [ext_resource type="Script" path="res://Scene_Script/BallRigid.cs" id="1_j2l6d"]
+[ext_resource type="AudioStream" uid="uid://cbl0lfttejtd8" path="res://Audio/sfx_Bowling.ogg" id="2_vghm7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fc35g"]
 
@@ -29,3 +30,6 @@ shape = SubResource("SphereShape3D_fc35g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_vh2jy")
+
+[node name="SFXBowling" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_vghm7")

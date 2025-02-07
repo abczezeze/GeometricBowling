@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://chh81713xfbx5"]
+[gd_scene load_steps=19 format=4 uid="uid://chh81713xfbx5"]
 
 [ext_resource type="Script" path="res://Scene_Script/BowlingThird.cs" id="1_3x2t5"]
 [ext_resource type="PackedScene" uid="uid://b555ea535q8ek" path="res://Scene_Script/BallRigid.tscn" id="2_qpoqg"]
@@ -84,9 +84,6 @@ tracks/0/keys = {
 "values": [0.0, 1.0, -1.0, 1.0, -1.0, 0.0, 0.0, 1.0, -1.0, 1.0, -1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_vsm8d"]
-resource_name = "Glance"
-
 [sub_resource type="Animation" id="Animation_lh4oq"]
 length = 0.001
 tracks/0/type = "value"
@@ -105,7 +102,6 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0omv8"]
 _data = {
 "BatIdle": SubResource("Animation_tbq52"),
-"Glance": SubResource("Animation_vsm8d"),
 "RESET": SubResource("Animation_lh4oq")
 }
 

@@ -15,6 +15,9 @@ public partial class BallRigid : RigidBody3D
     public static MeshInstance3D _ballMesh;
     RandomNumberGenerator _rng = new RandomNumberGenerator();
 
+    //sfx
+    AudioStreamPlayer3D _sfxBowlling;
+
 	public override void _Ready()
 	{
         AddToGroup("BallGroup");
@@ -24,6 +27,8 @@ public partial class BallRigid : RigidBody3D
 		{
 			ballMat.AlbedoColor = new Color(_rng.RandfRange(0,1), _rng.RandfRange(0,1), _rng.RandfRange(0,1));
 		}
+        _sfxBowlling = GetNode<AudioStreamPlayer3D>("SFXBowling");
+
 	}
 
     public override void _Process(double delta)
@@ -58,6 +63,7 @@ public partial class BallRigid : RigidBody3D
                     ApplyImpulse(new Vector3(0, 0, Global.PowerValue*-1));
                     _isFirstClick = true;
                     Global.JustAMomentLb.Visible = true;
+                    _sfxBowlling.Play();
                     Tween _tween = GetTree().CreateTween();
                     _tween.TweenProperty(Global.JustAMomentLb,"scale",new Vector2(3.0f,3.0f),0.5f).SetTrans(Tween.TransitionType.Back);
                     _tween.TweenProperty(Global.JustAMomentLb,"scale",Vector2.One,0.5f).SetTrans(Tween.TransitionType.Back);

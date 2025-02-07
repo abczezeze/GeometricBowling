@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://nmmev8eotyxj"]
+[gd_scene load_steps=8 format=3 uid="uid://nmmev8eotyxj"]
 
 [ext_resource type="Script" path="res://Scene_Script/Global.cs" id="1_r04jm"]
 [ext_resource type="FontFile" uid="uid://6igkmpymsu5m" path="res://Font/abczezeze.ttf" id="2_w7fpv"]
+[ext_resource type="AudioStream" uid="uid://btjq4kgwi71ai" path="res://Audio/bgm_GeomatricBowling.mp3" id="3_4jff4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bgit"]
 bg_color = Color(0, 0, 0, 0.780392)
@@ -29,20 +30,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w7fpv")
 theme_override_font_sizes/font_size = 25
 text = "MAIN"
-
-[node name="GeneratePinBt" type="Button" parent="VBoxMenu"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_w7fpv")
-theme_override_font_sizes/font_size = 25
-text = "Generate Pin"
-
-[node name="SweepPinBt" type="Button" parent="VBoxMenu"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_w7fpv")
-theme_override_font_sizes/font_size = 25
-text = "Sweep Pin"
 
 [node name="GenSweepBt" type="Button" parent="VBoxMenu"]
 layout_mode = 2
@@ -149,3 +136,8 @@ theme_override_fonts/font = ExtResource("2_w7fpv")
 theme_override_font_sizes/font_size = 25
 toggle_mode = true
 text = "EN/TH"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4jff4")
+volume_db = -16.0
+autoplay = true

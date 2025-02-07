@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 
 public partial class Global : Node
 {
@@ -16,8 +15,6 @@ public partial class Global : Node
     Button _languageButton;
 
     public static Label JustAMomentLb;
-    public static Button GenPinBt;
-    public static Button SweepPinBt;
     public static Button GenSweepBt;
     public static RigidBody3D SweepPinRigid;
 
@@ -48,12 +45,7 @@ public partial class Global : Node
         _homeButton.Pressed += GoHome;
         _languageButton = GetNode<Button>("LanguageBt");
         _languageButton.Toggled += ChangeLanguage;
-        GenPinBt = GetNode<Button>("VBoxMenu/GeneratePinBt");
-        GenPinBt.Pressed += GeneratePinFunc;
-        GenPinBt.Disabled = true;
         GeneratePinFunc();
-        SweepPinBt = GetNode<Button>("VBoxMenu/SweepPinBt");
-        SweepPinBt.Pressed += SweepPinFunc;
         GenSweepBt = GetNode<Button>("VBoxMenu/GenSweepBt");
         GenSweepBt.Pressed += GenSweepFunc;
 
@@ -87,11 +79,8 @@ public partial class Global : Node
         JustAMomentLb.Text = Tr("JAMOMENT");
         _homeButton.Text = Tr("MAIN");
         _languageButton.Text = Tr("EN/TH");
-        GenPinBt.Text = Tr("GENPIN");
-        SweepPinBt.Text = Tr("SWEEPPIN");
         GenSweepBt.Text = Tr("SWEEPGEN");
 
-        //if scene enter
         if(SceneEnter)TweenPower();
 
     }
@@ -119,7 +108,6 @@ public partial class Global : Node
                 }
 				PinRigid.AddToGroup("PinGroup");
 				AddChild(PinRigid);
-                GenPinBt.Disabled = true;
 			}
 		}
 	}
@@ -130,7 +118,6 @@ public partial class Global : Node
         SweepPinRigid.AddToGroup("SweepPin");
         AddChild(SweepPinRigid);
         SweepPinRigid.ApplyImpulse(new Vector3(0, 0, -50));
-        SweepPinBt.Disabled = true;
     }
     public void GenSweepFunc()
     {
@@ -141,8 +128,6 @@ public partial class Global : Node
     public static void IfBallGrop()
     {
         RollsCurrent += 1;
-        GenPinBt.Disabled = false;
-        SweepPinBt.Disabled = false;
         JustAMomentLb.Visible = false;
     }
     public void TweenPower()

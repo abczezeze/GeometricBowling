@@ -1,4 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bti87rjknnuvx"]
+[gd_scene load_steps=7 format=3 uid="uid://bti87rjknnuvx"]
+
+[ext_resource type="AudioStream" uid="uid://bmcxktqvsib6w" path="res://Audio/sfx_Pin.ogg" id="1_3j34f"]
+[ext_resource type="Script" path="res://Scene_Script/PinRigidA.cs" id="1_44h4i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxe0e"]
 radius = 0.3
@@ -24,6 +27,7 @@ roughness = 0.02
 [node name="PinRigidA" type="RigidBody3D"]
 mass = 0.001
 max_contacts_reported = 1
+script = ExtResource("1_44h4i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_pxe0e")
@@ -31,3 +35,6 @@ shape = SubResource("CapsuleShape3D_pxe0e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_fyo7r")
 surface_material_override/0 = SubResource("StandardMaterial3D_66kjb")
+
+[node name="SFXPin" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_3j34f")

@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://245is23kgrtk"]
+[gd_scene load_steps=6 format=3 uid="uid://245is23kgrtk"]
+
+[ext_resource type="AudioStream" uid="uid://bmcxktqvsib6w" path="res://Audio/sfx_Pin.ogg" id="1_nqxvg"]
+[ext_resource type="Script" path="res://Scene_Script/PinRigid.cs" id="1_tc8x1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jdd22"]
 size = Vector3(0.5, 2, 0.5)
@@ -12,9 +15,15 @@ size = Vector3(0.5, 2, 0.5)
 
 [node name="PinRigid" type="RigidBody3D"]
 mass = 0.001
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_tc8x1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_jdd22")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_m6ggn")
+
+[node name="SFXPin" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_nqxvg")
